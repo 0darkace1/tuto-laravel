@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePostRequest;
 use App\Models\Post;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -16,13 +17,9 @@ class BlogController extends Controller
         return view("blog.create");
     }
 
-    public function store(Request $request)
+    public function store(CreatePostRequest $request)
     {
-        $post = Post::create([
-            "title" => $request->input("title"),
-            "content" => $request->input("content"),
-            "slug" => Str::slug($request->input("title")),
-        ]);
+        $post = Post::create($request->validated());
 
         return redirect()->route("blog.show", [
             "slug" => $post->slug,
