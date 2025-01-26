@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\FormPostRequest;
-use App\Models\Category;
 
 class BlogController extends Controller
 {
@@ -16,13 +17,16 @@ class BlogController extends Controller
 
         // Retourner la vue de création d'article
         return view("blog.create", [
-            "post" => $post
+            "post" => $post,
+            "categories" => Category::select("id", "name")->get(),
+            "tags" => Tag::select("id", "name")->get(),
         ]);
     }
 
     public function store(FormPostRequest $request)
     {
         $post = Post::create($request->validated());
+        $post->tags()->sync($request->validated("tags"));
 
         return redirect()->route("blog.show", [
             "slug" => $post->slug,
@@ -34,12 +38,15 @@ class BlogController extends Controller
     {
         return view("blog.edit", [
             "post" => $post,
+            "categories" => Category::select("id", "name")->get(),
+            "tags" => Tag::select("id", "name")->get(),
         ]);
     }
 
     public function update(Post $post, FormPostRequest $request)
     {
         $post->update($request->validated());
+        $post->tags()->sync($request->validated("tags"));
 
         return redirect()->route("blog.show", [
             "slug" => $post->slug,
@@ -49,15 +56,8 @@ class BlogController extends Controller
 
     public function index(): View
     {
-        $category = Category::find(1);
-        $post = Post::find(10);
-
-        $category->posts()->where("id", ">", 10)->get();
-
-
-        // Récupérer et Retourner les articles sous forme de json
         return view("blog.index", [
-            "posts" => Post::paginate(1),
+            "posts" => Post::with("tags", "category")->paginate(10),
         ]);
     }
 
