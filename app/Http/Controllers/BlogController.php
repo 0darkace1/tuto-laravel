@@ -8,6 +8,8 @@ use App\Models\Category;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\FormPostRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class BlogController extends Controller
 {
@@ -56,6 +58,12 @@ class BlogController extends Controller
 
     public function index(): View
     {
+        // User::create([
+        //     "name" => "Ali Yanik",
+        //     "email" => "ali-yanik@live.fr",
+        //     "password" => Hash::make("password"),
+        // ]);
+
         return view("blog.index", [
             "posts" => Post::with("tags", "category")->paginate(10),
         ]);

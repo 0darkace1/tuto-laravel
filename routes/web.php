@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 
@@ -32,3 +33,5 @@ Route::prefix('/blog')->name("blog.")->controller(BlogController::class)->group(
         "slug" => "[a-z0-9-]+"
     ])->name("show");
 });
+
+Route::get("/login", [AuthController::class, "login"])->name("auth.login");
