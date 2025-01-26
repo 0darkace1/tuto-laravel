@@ -27,7 +27,7 @@ class BlogController extends Controller
         return redirect()->route("blog.show", [
             "slug" => $post->slug,
             "post" => $post->id
-        ])->with("success", "Article créé avec succès !");
+        ])->with("success", "Article créer avec succès !");
     }
 
     public function edit(Post $post): View
@@ -49,6 +49,12 @@ class BlogController extends Controller
 
     public function index(): View
     {
+        $category = Category::find(1);
+        $post = Post::find(10);
+
+        $category->posts()->where("id", ">", 10)->get();
+
+
         // Récupérer et Retourner les articles sous forme de json
         return view("blog.index", [
             "posts" => Post::paginate(1),
