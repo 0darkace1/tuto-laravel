@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\FormPostRequest;
+use App\Models\Category;
 
 class BlogController extends Controller
 {
@@ -48,6 +49,14 @@ class BlogController extends Controller
 
     public function index(): View
     {
+        Category::create([
+            "name" => "Categorie 1",
+        ]);
+
+        Category::create([
+            "name" => "Categorie 1",
+        ]);
+
         // Récupérer et Retourner les articles sous forme de json
         return view("blog.index", [
             "posts" => Post::paginate(1),
