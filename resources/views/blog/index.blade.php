@@ -3,7 +3,8 @@
 @section("title", "Accueil du blog")
 
 @section("content")
-    <h1>Mon Blog</h1>
+    <h1>Mon Premier Blog</h1>
+    <hr>
 
     @foreach ($posts as $post)
         <article>
