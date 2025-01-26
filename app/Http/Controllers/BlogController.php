@@ -49,14 +49,6 @@ class BlogController extends Controller
 
     public function index(): View
     {
-        Category::create([
-            "name" => "Categorie 1",
-        ]);
-
-        Category::create([
-            "name" => "Categorie 1",
-        ]);
-
         // Récupérer et Retourner les articles sous forme de json
         return view("blog.index", [
             "posts" => Post::paginate(1),
