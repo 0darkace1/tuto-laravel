@@ -65,10 +65,10 @@ class BlogController extends Controller
 
         /** @var UploadedFile|null $image */
         $image = $request->validated('image');
+
         if ($image === null || $image->getError()) {
             return $validatedRequest;
         }
-
         if ($post->image) {
             Storage::disk("public")->delete($post->image);
         }
@@ -80,12 +80,6 @@ class BlogController extends Controller
 
     public function index(): View
     {
-        // User::create([
-        //     "name" => "Ali Yanik",
-        //     "email" => "ali-yanik@live.fr",
-        //     "password" => Hash::make("password"),
-        // ]);
-
         return view("blog.index", [
             "posts" => Post::with("tags", "category")->paginate(10),
         ]);

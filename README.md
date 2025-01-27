@@ -123,3 +123,15 @@ Linker le dossier PUBLIC pour le storage
 ```
 php artisan storage:link
 ```
+
+Créer un seeder
+
+```
+php artisan make:seeder AdminSeeder
+```
+
+Lancer le seeder
+
+```
+php artisan db:seed --class=AdminSeeder
+```
