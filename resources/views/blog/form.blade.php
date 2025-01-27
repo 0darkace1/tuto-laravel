@@ -1,8 +1,15 @@
 <div class="card" style="width: 36rem;">
     <div class="card-body">
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
             @csrf
             @method($post->id ? "PATCH" : "POST")
+            <div class="form-group mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input id="image" name="image" type="file" class="form-control @error('file') is-invalid @enderror">
+                @error('image')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
             <div class="form-group mb-3">
                 <label for="title" class="form-label">Titre</label>
                 <input id="title" name="title" type="text" class="form-control @error('title') is-invalid @enderror" placeholder="Titre de l'article" value="{{old("title", $post->title)}}" required>

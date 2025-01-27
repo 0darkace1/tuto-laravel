@@ -3,8 +3,10 @@
 @section("title", $post->title)
 
 @section("content")
-    <div class="card">
-        {{-- <img src="https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg" class="card-img-top" alt="..."> --}}
+    <div class="card" style="width: 18rem;">
+        @if($post->image)
+            <img src="{{ $post->imageUrl() }}" class="card-img-top">
+        @endif
         <div class="card-body">
             <h5 class="card-title">{{ $post->title }}</h5>
             <p class="card-text">{{ $post->content }}</p>
