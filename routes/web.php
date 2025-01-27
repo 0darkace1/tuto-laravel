@@ -15,15 +15,21 @@ use App\Http\Controllers\BlogController;
 |
 */
 
+// --- Welcome page ---
 Route::get('/', function () {
     return view('welcome');
 });
 
+// --- Auth routes ---
 Route::get("/login", [AuthController::class, "login"])->name("auth.login");
 Route::post("/login", [AuthController::class, "signIn"]);
+
+Route::get("/register", [AuthController::class, "register"])->name("auth.register");
+Route::post("/register", [AuthController::class, "signUp"]);
+
 Route::delete("/logout", [AuthController::class, "logout"])->name("auth.logout");
 
-
+// --- Blog routes ---
 Route::prefix('/blog')->name("blog.")->controller(BlogController::class)->group(function () {
     Route::get("/", "index")->name("index");
 
