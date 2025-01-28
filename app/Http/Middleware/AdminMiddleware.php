@@ -19,7 +19,6 @@ class AdminMiddleware
             return $next($request);
         }
 
-        return redirect(route("blog.index"))->with('error', 'Unauthorized access.');
-        // return $next($request);
+        return redirect()->route("blog.index")->with('error', 'Accès non autorisé');
     }
 }
