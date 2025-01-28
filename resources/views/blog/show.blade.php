@@ -26,10 +26,10 @@
             @endif
         </ul>
 
-        @auth
+        @if(auth()?->user()?->role == "admin")
             <div class="card-footer">
-                <a href="{{ route("blog.edit", ["post" => $post->id]) }}" class="ml-auto card-link">Éditer</a>
+                <a href="{{ route("blog.edit", ["post" => $post->id]) }}" class="card-link">Éditer</a>
             </div>
-        @endauth
+        @endif
     </div>
 @endsection

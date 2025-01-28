@@ -36,14 +36,12 @@
                             @endif
                         </ul>
 
-                        @auth
-                            @if(auth())
-                            @endif
-                            <div class="card-footer">
-                                <a class="card-link" href="{{ route("blog.show", ["slug" => $post->slug, "post" => $post->id]) }}">Lire la suite</a>
+                        <div class="card-footer">
+                            <a class="card-link" href="{{ route("blog.show", ["slug" => $post->slug, "post" => $post->id]) }}">Lire la suite</a>
+                            @if(auth()?->user()?->role == "admin")
                                 <a href="{{ route("blog.edit", ["post" => $post->id]) }}" class="card-link">Éditer</a>
-                            </div>
-                        @endauth
+                            @endif
+                        </div>
                     </div>
                 </div>
             @endforeach

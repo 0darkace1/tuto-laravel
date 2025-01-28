@@ -33,11 +33,11 @@ Route::delete("/logout", [AuthController::class, "logout"])->name("auth.logout")
 Route::prefix('/blog')->name("blog.")->controller(BlogController::class)->group(function () {
     Route::get("/", "index")->name("index");
 
-    Route::get('/new', "create")->name("create")->middleware("auth");
-    Route::post('/new', "store")->middleware("auth");
+    Route::get('/new', "create")->name("create")->middleware(["auth", "admin"]);
+    Route::post('/new', "store")->middleware(["auth", "admin"]);
 
-    Route::get('/{post}/edit', "edit")->name("edit")->middleware("auth");
-    Route::patch('/{post}/edit', "update")->middleware("auth");
+    Route::get('/{post}/edit', "edit")->name("edit")->middleware(["auth", "admin"]);
+    Route::patch('/{post}/edit', "update")->middleware(["auth", "admin"]);
 
     Route::get("/{slug}-{post}", "show")->where([
         "post" => "[0-9]+",

@@ -135,3 +135,9 @@ Lancer le seeder
 ```
 php artisan db:seed --class=AdminSeeder
 ```
+
+Créer un middleware
+
+```
+php artisan make:middleware AdminMiddleware
+```

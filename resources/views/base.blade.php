@@ -25,11 +25,11 @@
                     <li class="nav-item active">
                         <a @class(['nav-link', 'active' => str_starts_with($route, "blog")]) href="{{ route("blog.index") }}">Blog</a>
                     </li>
-                    @auth
+                    @if(auth()?->user()?->role == "admin")
                         <li class="nav-item">
                             <a class="nav-link" href="/blog/new">Nouveau</a>
                         </li>
-                    @endauth
+                    @endif
                 </ul>
 
                 <div class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -59,7 +59,13 @@
         </div>
     </nav>
 
-    <div class="container ">
+    <div class="container">
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
+
         @if(session("success"))
             <div class="alert alert-success">{{ session("success") }}</div>
         @endif
