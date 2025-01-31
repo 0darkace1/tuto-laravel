@@ -100,6 +100,12 @@ Créer une MIGRATION:
 php artisan make:migration CreatePostTable
 ```
 
+Créer une MIGRATION avec model:
+
+```
+php artisan make:migration CreatePostTable -m
+```
+
 Faire la migration
 
 ```
@@ -116,6 +122,12 @@ Créer un CONTROLLER:
 
 ```
 php artisan make:controller BlogController
+```
+
+Créer un CONTROLLER avec CRUD:
+
+```
+php artisan make:controller BlogController -r
 ```
 
 Linker le dossier PUBLIC pour le storage
